@@ -7,6 +7,7 @@
 Custom n8n node para integração com a API uChat (https://www.uchat.com.au/api).
 
 > 🚀 **Open Source** - Contribuições são bem-vindas! Veja [CONTRIBUTING.md](CONTRIBUTING.md)
+> ⚠️ **Aviso importante**: Este repositório é um fork não-oficial do projeto NicoChat. O uso deste código é por sua conta e risco e não possui suporte oficial do time uChat.
 
 ## Créditos
 
