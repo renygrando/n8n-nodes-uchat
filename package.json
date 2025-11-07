@@ -17,10 +17,10 @@
         },
         "repository": {
                 "type": "git",
-                "url": "https://github.com/nicolaom/n8n-nodes-uchat.git"
+                "url": "https://github.com/renygrando/n8n-nodes-uchat.git"
         },
         "bugs": {
-                "url": "https://github.com/nicolaom/n8n-nodes-uchat/issues"
+                "url": "https://github.com/renygrando/n8n-nodes-uchat/issues"
         },
         "scripts": {
                 "build": "n8n-node build",
