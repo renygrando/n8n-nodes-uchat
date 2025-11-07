@@ -8,6 +8,10 @@ Custom n8n node para integração com a API uChat (https://www.uchat.com.au/api)
 
 > 🚀 **Open Source** - Contribuições são bem-vindas! Veja [CONTRIBUTING.md](CONTRIBUTING.md)
 
+## Créditos
+
+Este projeto é baseado no [n8n-nodes-nicochat](https://github.com/nicollaspetrelli/n8n-nodes-nicochat) desenvolvido por [Nicollas Petrelli](https://github.com/nicollaspetrelli), que é disponibilizado sob a licença MIT. Agradecemos pela excelente base de código que permitiu a adaptação para o uChat.
+
 ## Instalação
 
 ### Opção 1: Via npm
