@@ -1,6 +1,6 @@
 {
         "name": "n8n-nodes-uchat",
-        "version": "0.4.7-0",
+        "version": "0.4.7-1",
         "description": "n8n node para integração com a API do uChat",
         "keywords": [
                 "n8n-community-node-package",
@@ -17,7 +17,7 @@
         },
         "repository": {
                 "type": "git",
-                "url": "https://github.com/renygrando/n8n-nodes-uchat.git"
+                "url": "git+https://github.com/renygrando/n8n-nodes-uchat.git"
         },
         "main": "dist/index.js",
         "types": "dist/index.d.ts",
