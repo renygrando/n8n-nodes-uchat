@@ -1,6 +1,6 @@
 {
         "name": "n8n-nodes-uchat",
-        "version": "0.4.7-1",
+        "version": "0.4.7-2",
         "description": "n8n node para integração com a API do uChat",
         "keywords": [
                 "n8n-community-node-package",
