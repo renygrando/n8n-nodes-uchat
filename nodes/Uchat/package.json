@@ -1,6 +1,6 @@
 {
         "name": "n8n-nodes-uchat",
-        "version": "0.4.7-4",
+        "version": "0.4.7-5",
         "main": "../../dist/nodes/Uchat/Uchat.node.js",
         "n8n": {
                 "credentials": ["../../dist/credentials/UchatApi.credentials.js"]

@@ -8,6 +8,8 @@ import type {
 } from 'n8n-workflow';
 import { NodeOperationError } from 'n8n-workflow';
 
+const API_BASE_URL = 'https://www.uchat.com.au/api';
+
 export class Uchat implements INodeType {
         description: INodeTypeDescription;
         methods: INodeType['methods'];
@@ -968,7 +970,7 @@ export class Uchat implements INodeType {
                 async getFlows(this: ILoadOptionsFunctions) {
                     const returnData = [];
                     try {
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'GET',
                             url: '/flow/subflows',
                             json: true,
@@ -1001,7 +1003,7 @@ export class Uchat implements INodeType {
                 async getCustomFields(this: ILoadOptionsFunctions) {
                     const returnData = [];
                     try {
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'GET',
                             url: '/flow/user-fields',
                             json: true,
@@ -1034,7 +1036,7 @@ export class Uchat implements INodeType {
                 async getTemplates(this: ILoadOptionsFunctions) {
                     const returnData = [];
                     try {
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'POST',
                             url: '/whatsapp-template/list',
                             json: true,
@@ -1089,7 +1091,7 @@ export class Uchat implements INodeType {
                             body.email = email;
                         if (phone)
                             body.phone = phone;
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'POST',
                             url: '/subscriber/create',
                             body,
@@ -1099,7 +1101,7 @@ export class Uchat implements INodeType {
                     }
                     else if (operation === 'get') {
                         const userNs = this.getNodeParameter('userNs', i) as string;
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'GET',
                             url: '/subscriber/get-info',
                             qs: { user_ns: userNs },
@@ -1142,7 +1144,7 @@ export class Uchat implements INodeType {
                             qs.user_field_ns = filters.user_field_ns;
                         if (filters.user_field_value)
                             qs.user_field_value = filters.user_field_value;
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'GET',
                             url: '/subscribers',
                             qs,
@@ -1155,7 +1157,7 @@ export class Uchat implements INodeType {
                         const updateFields = this.getNodeParameter('updateFields', i) as IDataObject;
                         const body: IDataObject = { user_ns: userNs };
                         Object.assign(body, updateFields);
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'PUT',
                             url: '/subscriber/update',
                             body,
@@ -1165,7 +1167,7 @@ export class Uchat implements INodeType {
                     }
                     else if (operation === 'delete') {
                         const userNs = this.getNodeParameter('userNs', i) as string;
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'DELETE',
                             url: '/subscriber/delete',
                             body: { user_ns: userNs },
@@ -1178,7 +1180,7 @@ export class Uchat implements INodeType {
                     if (operation === 'addToSubscriber') {
                         const userNs = this.getNodeParameter('userNs', i) as string;
                         const tagName = this.getNodeParameter('tagName', i) as string;
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'POST',
                             url: '/subscriber/add-tag-by-name',
                             body: {
@@ -1196,7 +1198,7 @@ export class Uchat implements INodeType {
                         const data = tags.map((tag) => ({
                             tag_name: tag.tagName,
                         }));
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'POST',
                             url: '/subscriber/add-tags-by-name',
                             body: {
@@ -1210,7 +1212,7 @@ export class Uchat implements INodeType {
                     else if (operation === 'removeFromSubscriber') {
                         const userNs = this.getNodeParameter('userNs', i) as string;
                         const tagName = this.getNodeParameter('tagName', i) as string;
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'DELETE',
                             url: '/subscriber/remove-tag-by-name',
                             body: {
@@ -1228,7 +1230,7 @@ export class Uchat implements INodeType {
                         const data = tags.map((tag) => ({
                             tag_name: tag.tagName,
                         }));
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'DELETE',
                             url: '/subscriber/remove-tags-by-name',
                             body: {
@@ -1241,7 +1243,7 @@ export class Uchat implements INodeType {
                     }
                     else if (operation === 'create') {
                         const tagName = this.getNodeParameter('tagName', i) as string;
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'POST',
                             url: '/flow/create-tag',
                             body: { name: tagName },
@@ -1251,7 +1253,7 @@ export class Uchat implements INodeType {
                     }
                     else if (operation === 'delete') {
                         const tagName = this.getNodeParameter('tagName', i) as string;
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'DELETE',
                             url: '/flow/delete-tag-by-name',
                             body: { name: tagName },
@@ -1268,7 +1270,7 @@ export class Uchat implements INodeType {
                             qs.page = options.page;
                         if (options.name)
                             qs.name = options.name;
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'GET',
                             url: '/flow/tags',
                             qs,
@@ -1279,7 +1281,7 @@ export class Uchat implements INodeType {
                 }
                 else if (resource === 'customField') {
                     if (operation === 'getMany') {
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'GET',
                             url: '/flow/user-fields',
                             json: true,
@@ -1290,7 +1292,7 @@ export class Uchat implements INodeType {
                         const userNs = this.getNodeParameter('userNs', i) as string;
                         const varNs = this.getNodeParameter('fieldName', i) as string;
                         const fieldValue = this.getNodeParameter('fieldValue', i);
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'PUT',
                             url: '/subscriber/set-user-field',
                             body: {
@@ -1310,7 +1312,7 @@ export class Uchat implements INodeType {
                             var_ns: field.fieldName,
                             value: field.fieldValue,
                         }));
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'PUT',
                             url: '/subscriber/set-user-fields',
                             body: {
@@ -1326,7 +1328,7 @@ export class Uchat implements INodeType {
                     if (operation === 'sendToSubscriber') {
                         const userNs = this.getNodeParameter('userNs', i) as string;
                         const flowId = this.getNodeParameter('flowName', i) as string;
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'POST',
                             url: '/subscriber/send-sub-flow',
                             body: {
@@ -1338,7 +1340,7 @@ export class Uchat implements INodeType {
                         returnData.push(responseData);
                     }
                     else if (operation === 'getMany') {
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'GET',
                             url: '/flow/subflows',
                             json: true,
@@ -1353,7 +1355,7 @@ export class Uchat implements INodeType {
                         const users = userNsList
                             .split(',')
                             .map((u) => u.trim());
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'POST',
                             url: '/subscriber/broadcast',
                             body: {
@@ -1367,7 +1369,7 @@ export class Uchat implements INodeType {
                     else if (operation === 'sendByTag') {
                         const message = this.getNodeParameter('message', i) as string;
                         const tagName = this.getNodeParameter('tagName', i) as string;
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'POST',
                             url: '/subscriber/broadcast-by-tag',
                             body: {
@@ -1397,7 +1399,7 @@ export class Uchat implements INodeType {
                                 throw new NodeOperationError(this.getNode(), 'Parâmetros do template devem ser um JSON válido');
                             }
                         }
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'POST',
                             url: '/subscriber/send-whatsapp-template',
                             body,
@@ -1410,7 +1412,7 @@ export class Uchat implements INodeType {
                     if (operation === 'getHistory') {
                         const userNs = this.getNodeParameter('userNs', i) as string;
                         const limit = this.getNodeParameter('limit', i);
-                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', {
+                        const responseData = await this.helpers.httpRequestWithAuthentication.call(this, 'uchatApi', { baseURL: API_BASE_URL,
                             method: 'GET',
                             url: '/subscriber/chat-messages',
                             qs: {
