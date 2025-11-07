@@ -29,7 +29,8 @@ export class UchatApi implements ICredentialType {
                 type: 'generic',
                 properties: {
                         headers: {
-                                'X-API-Key': '={{$credentials.apiKey}}',
+                                Authorization: '={{"Bearer " + $credentials.apiKey}}',
+                                Accept: 'application/json',
                                 'Content-Type': 'application/json',
                         },
                 },
