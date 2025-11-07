@@ -37,8 +37,8 @@ export class UchatApi implements ICredentialType {
 
         test: ICredentialTestRequest = {
                 request: {
-                        baseURL: 'https://www.uchat.com.au/api/v1',
-                        url: '/contacts',
+                        baseURL: 'https://www.uchat.com.au/api',
+                        url: '/flow/user-fields',
                         method: 'GET',
                 },
         };
