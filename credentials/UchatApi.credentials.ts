@@ -29,15 +29,16 @@ export class UchatApi implements ICredentialType {
                 type: 'generic',
                 properties: {
                         headers: {
-                                'Authorization': '=Bearer {{$credentials.apiKey}}',
+                                'X-API-Key': '={{$credentials.apiKey}}',
+                                'Content-Type': 'application/json',
                         },
                 },
         };
 
         test: ICredentialTestRequest = {
                 request: {
-                        baseURL: 'https://www.uchat.com.au/api',
-                        url: '/flow/bot-fields',
+                        baseURL: 'https://www.uchat.com.au/api/v1',
+                        url: '/contacts',
                         method: 'GET',
                 },
         };

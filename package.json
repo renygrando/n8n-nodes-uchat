@@ -1,9 +1,7 @@
 {
         "name": "n8n-nodes-uchat",
-        "version": "0.4.3-0",
+        "version": "0.4.7-0",
         "description": "n8n node para integração com a API do uChat",
-        "license": "MIT",
-        "homepage": "https://www.uchat.com.au",
         "keywords": [
                 "n8n-community-node-package",
                 "uchat",
@@ -11,6 +9,8 @@
                 "chat",
                 "automation"
         ],
+        "license": "MIT",
+        "homepage": "https://www.uchat.com.au",
         "author": {
                 "name": "uChat",
                 "email": "contato@uchat.com.au"
@@ -19,24 +19,21 @@
                 "type": "git",
                 "url": "https://github.com/renygrando/n8n-nodes-uchat.git"
         },
-        "bugs": {
-                "url": "https://github.com/renygrando/n8n-nodes-uchat/issues"
-        },
+        "main": "dist/index.js",
+        "types": "dist/index.d.ts",
         "scripts": {
-                "build": "n8n-node build",
-                "build:watch": "tsc --watch",
-                "dev": "n8n-node dev",
-                "lint": "n8n-node lint",
-                "lint:fix": "n8n-node lint --fix",
-                "release": "n8n-node release",
-                "prepublishOnly": "n8n-node prerelease"
+                "build": "tsc",
+                "dev": "tsc --watch",
+                "format": "prettier --write .",
+                "lint": "eslint .",
+                "lintfix": "eslint . --fix",
+                "prepublishOnly": "npm run build"
         },
         "files": [
                 "dist"
         ],
         "n8n": {
                 "n8nNodesApiVersion": 1,
-                "strict": true,
                 "credentials": [
                         "dist/credentials/UchatApi.credentials.js"
                 ],
@@ -46,13 +43,15 @@
                 ]
         },
         "devDependencies": {
-                "@n8n/node-cli": "*",
-                "eslint": "9.32.0",
-                "prettier": "3.6.2",
-                "release-it": "^19.0.4",
-                "typescript": "5.9.2"
+                "@n8n/node-cli": "^0.14.0",
+                "@types/express": "^4.17.17",
+                "@types/node": "^18.16.16",
+                "eslint": "^9.39.1",
+                "typescript": "~5.0.4"
         },
-        "peerDependencies": {
-                "n8n-workflow": "*"
+        "dependencies": {
+                "axios": "^1.4.0",
+                "n8n-core": "^1.0.0",
+                "n8n-workflow": "^1.0.0"
         }
 }

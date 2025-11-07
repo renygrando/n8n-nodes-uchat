@@ -1,4 +1,4 @@
-# NicoChat n8n Custom Node - Project Documentation
+# uChat n8n Custom Node - Project Documentation
 
 ## Project Overview
 
@@ -8,12 +8,12 @@ This is a custom n8n node for integrating with the uChat API (https://www.uchat.
 
 Last updated: October 25, 2025
 
-**🔗 Repository**: https://github.com/nicolaom/n8n-nodes-nicochat
-**📦 npm**: https://www.npmjs.com/package/n8n-nodes-nicochat
+**🔗 Repository**: https://github.com/renygrando/n8n-nodes-uchat
+**📦 npm**: https://www.npmjs.com/package/n8n-nodes-uchat
 
 ## What This Node Does
 
-The NicoChat custom node allows n8n users to automate WhatsApp marketing and customer service workflows by connecting to the NicoChat platform. It provides:
+The uChat custom node allows n8n users to automate WhatsApp marketing and customer service workflows by connecting to the uChat platform. It provides:
 
 - **Contact Management**: Create, update, delete, and search for contacts (subscribers)
 - **Tag Management**: Organize contacts with tags for segmentation
@@ -26,6 +26,7 @@ The NicoChat custom node allows n8n users to automate WhatsApp marketing and cus
 ## Architecture
 
 ### Technology Stack
+
 - **Language**: TypeScript
 - **Runtime**: Node.js 20
 - **Framework**: n8n node development framework
@@ -34,15 +35,16 @@ The NicoChat custom node allows n8n users to automate WhatsApp marketing and cus
 - **Formatting**: Prettier
 
 ### Project Structure
+
 ```
-n8n-nodes-nicochat/
+n8n-nodes-uchat/
 ├── credentials/
-│   └── NicoChatApi.credentials.ts    # API Key authentication
+│   └── UchatApi.credentials.ts    # API Key authentication
 ├── nodes/
-│   └── NicoChat/
-│       ├── NicoChat.node.ts          # Main node implementation (1107 lines)
-│       ├── NicoChat.node.json        # Node metadata
-│       └── nicochat.svg              # Node icon (64x64 SVG)
+│   └── Uchat/
+│       ├── Uchat.node.ts          # Main node implementation (1107 lines)
+│       ├── Uchat.node.json        # Node metadata
+│       └── uchat.svg              # Node icon (64x64 SVG)
 ├── package.json                       # Project configuration
 ├── tsconfig.json                      # TypeScript settings
 └── README.md                          # User documentation
@@ -51,9 +53,11 @@ n8n-nodes-nicochat/
 ## Implementation Details
 
 ### Node Type
+
 **Programmatic Node** - Uses custom `execute` method for complex operations and dynamic dropdown support.
 
 ### Authentication
+
 - Type: API Key (Bearer token)
 - Header: `Authorization: Bearer {api_key}`
 - Base URL: https://www.uchat.com.au/api
@@ -62,37 +66,32 @@ n8n-nodes-nicochat/
 
 1. **Subscribers** (6 operations)
    - Get, Create, Update, Delete, Search (with 16 filters), Get Many (deprecated)
-   
 2. **Tags** (7 operations)
    - Add to Subscriber, Remove from Subscriber, Add Multiple Tags, Remove Multiple Tags, Create, Delete, Get Many
    - ⚠️ **No Update**: API doesn't support editing tags
    - ✨ Multi-tag operations support up to 20 tags in a single request
-   
 3. **Custom Fields** (2 operations)
    - Get Many, Set Field Value
-   
 4. **Flow** (2 operations)
    - Send to Subscriber, Get Many
    - ✨ Dynamic dropdown for flow selection
-   
 5. **Broadcast** (2 operations)
    - Send to Contacts, Send to Tags
-   
 6. **WhatsApp Templates** (2 operations)
    - Get Many, Send
    - ✨ Dynamic dropdown for template selection
-   
 7. **Conversation** (1 operation)
    - Get History (with date filters and pagination)
 
-8. **🆕 Requisicao Externa NicoChat Trigger** (webhook trigger)
-   - Webhook endpoint simples para receber requisições do NicoChat
+8. **🆕 Requisicao Externa uChat Trigger** (webhook trigger)
+   - Webhook endpoint simples para receber requisições do uChat
    - Retorna body, headers e query da requisição
    - Sem autenticação (baseado em webhook)
 
 ### Dynamic Features
 
 The node implements **loadOptions** methods for dynamic dropdowns:
+
 - `getFlows()` - Lists available flows for selection
 - `getTemplates()` - Lists available WhatsApp templates for selection
 
@@ -101,74 +100,82 @@ This provides a better user experience by showing actual options instead of requ
 ## Development Configuration
 
 ### Build Workflow
+
 - **Name**: Build
 - **Command**: `npm run build:watch`
 - **Status**: ✅ Running (0 errors)
 - **Purpose**: Automatically compiles TypeScript on file changes
 
 ### Package Configuration
+
 ```json
 {
-  "name": "n8n-nodes-nicochat",
-  "version": "0.1.0",
-  "description": "n8n node for NicoChat API integration",
-  "main": "index.js",
-  "n8n": {
-    "nodes": ["dist/nodes/NicoChat/NicoChat.node.js"],
-    "credentials": ["dist/credentials/NicoChatApi.credentials.js"]
-  }
+	"name": "n8n-nodes-uchat",
+	"version": "0.1.0",
+	"description": "n8n node for uChat API integration",
+	"main": "index.js",
+	"n8n": {
+		"nodes": ["dist/nodes/Uchat/Uchat.node.js"],
+		"credentials": ["dist/credentials/UchatApi.credentials.js"]
+	}
 }
 ```
 
 ## API Limitations & Design Decisions
 
 ### Known API Limitations
-1. **No Tag Update**: NicoChat API doesn't provide an endpoint to update/rename tags
+
+1. **No Tag Update**: uChat API doesn't provide an endpoint to update/rename tags
    - To "rename" a tag, users must create a new one and delete the old one
    - This limitation is documented in the README
 
 ### Design Decisions
+
 1. **Programmatic vs Declarative**: Chose programmatic style because:
    - Need dynamic dropdowns based on user's actual data
    - Complex request/response handling required
    - Better control over error handling and data transformation
 
 2. **Portuguese Language**: All operation descriptions and labels are in Portuguese because:
-   - NicoChat is a Brazilian platform
+   - uChat is an Australian platform
    - Target users are primarily Portuguese speakers
 
 3. **user_ns Identifier**: Used consistently across operations
-   - This is NicoChat's unique identifier for contacts
+   - This is uChat's unique identifier for contacts
    - Preferred over email for reliability
 
 ## Testing & Quality Assurance
 
 ### Build Status
+
 ✅ TypeScript compilation: 0 errors
 ✅ Code structure: Verified by architect
 ✅ API endpoint mapping: Complete and accurate
 ✅ Node metadata: Correct package identifier
 
 ### Required Testing (User must perform)
+
 1. **End-to-end testing** in actual n8n instance
-2. **API integration testing** with real NicoChat credentials
+2. **API integration testing** with real uChat credentials
 3. **Error handling validation** with edge cases
 4. **Rate limiting behavior** verification
 
 ## User Preferences
 
-*No specific user preferences recorded yet*
+_No specific user preferences recorded yet_
 
 ## Recent Changes
 
 ### November 6, 2025 - Version 0.4.1 Código Corrigido ✅
+
 - ✅ **BUGFIX CRÍTICO**: Corrigido parâmetro de envio de fluxo para contato
 - Alterado de `flow_id` para `sub_flow_ns` conforme documentação da API
 - Operação "Send to Subscriber" do recurso Flow agora funciona corretamente
 - **Status**: Aguardando login npm para publicação
 
 ### October 25, 2025 - Version 0.4.0 Published to npm ✅
-- ✅ **Published to npm**: https://www.npmjs.com/package/n8n-nodes-nicochat
+
+- ✅ **Published to npm**: https://www.npmjs.com/package/n8n-nodes-uchat
 - **Feature**: Adicionados todos os parâmetros do webhook padrão do n8n
 - HTTP Method configurável (POST, GET, PUT, DELETE, PATCH, HEAD)
 - Path customizável
@@ -178,37 +185,41 @@ This provides a better user experience by showing actual options instead of requ
 - Interface idêntica ao webhook nativo do n8n
 
 ### October 25, 2025 - Version 0.3.3 Published to npm ✅
-- ✅ **Published to npm**: https://www.npmjs.com/package/n8n-nodes-nicochat
+
+- ✅ **Published to npm**: https://www.npmjs.com/package/n8n-nodes-uchat
 - **BREAKING CHANGE**: Trigger simplificado drasticamente
 - Removidos filtros de eventos e opções avançadas do trigger
 - Agora é apenas um webhook simples que recebe dados (body, headers, query)
-- Nome alterado para "Requisicao Externa NicoChat Trigger" (conforme padrão n8n)
+- Nome alterado para "Requisicao Externa uChat Trigger" (conforme padrão n8n)
 - Código do trigger reduzido de 182 para 61 linhas
 
 ### October 25, 2025 - Version 0.3.2 Published to npm ✅
-- ✅ **Published to npm**: https://www.npmjs.com/package/n8n-nodes-nicochat
+
+- ✅ **Published to npm**: https://www.npmjs.com/package/n8n-nodes-uchat
 - Versão open-source completa preparada para GitHub
 - Documentação completa para contribuidores
 - CHANGELOG.md com histórico de todas as versões
 - Badges e links atualizados no README
 
 ### October 25, 2025 - Version 0.3.1 Published to npm ✅
-- ✅ **Fix**: Corrigida URL do repositório GitHub de `nicochat` para `nicolaom`
-- ✅ **Published to npm**: https://www.npmjs.com/package/n8n-nodes-nicochat
+
+- ✅ **Fix**: Corrigida URL do repositório GitHub de `nicochat` para `renygrando`
+- ✅ **Published to npm**: https://www.npmjs.com/package/n8n-nodes-uchat
 - Adicionado campo `bugs` no package.json apontando para GitHub Issues
 - Criado arquivo CONTRIBUTING.md com guia para contribuidores
 - Criado arquivo GITHUB_SETUP.md com instruções para publicar no GitHub
 - Preparado para publicação open-source no GitHub
 
 ### October 25, 2025 - Version 0.3.0 Published to npm ✅ 🎉
-- ✅ **Major Feature**: Added NicoChat Trigger (webhook trigger node)
-- ✅ **Published to npm**: https://www.npmjs.com/package/n8n-nodes-nicochat
+
+- ✅ **Major Feature**: Added uChat Trigger (webhook trigger node)
+- ✅ **Published to npm**: https://www.npmjs.com/package/n8n-nodes-uchat
 - New Trigger Features:
-  - **Webhook Endpoint**: Generates unique URL for NicoChat to call
+  - **Webhook Endpoint**: Generates unique URL for uChat to call
   - **Event Filtering**: Select which events trigger the workflow (message received, tag added, field updated, conversion, custom events)
-  - **Flexible Response**: Option to send custom JSON response back to NicoChat
-  - **Easy Setup**: Copy webhook URL from n8n → Paste in NicoChat "Ação > Ação Avançada > Requisição API"
-  - **Event-driven Automation**: Build workflows triggered by NicoChat events
+  - **Flexible Response**: Option to send custom JSON response back to uChat
+  - **Easy Setup**: Copy webhook URL from n8n → Paste in uChat "Ação > Ação Avançada > Requisição API"
+  - **Event-driven Automation**: Build workflows triggered by uChat events
 - Use Cases:
   - "When user responds X" → Start workflow
   - "When tag is added" → Execute action
@@ -216,8 +227,9 @@ This provides a better user experience by showing actual options instead of requ
   - "When conversion happens" → Update CRM
 
 ### October 25, 2025 - Version 0.2.2 Published to npm ✅
+
 - ✅ **Enhancement**: Added dynamic dropdown for WhatsApp templates selection
-- ✅ **Published to npm**: https://www.npmjs.com/package/n8n-nodes-nicochat
+- ✅ **Published to npm**: https://www.npmjs.com/package/n8n-nodes-uchat
 - New Features:
   - Created `getTemplates()` loadOptions method to fetch WhatsApp templates from API
   - Modified `templateName` field to use dynamic dropdown instead of text input
@@ -225,8 +237,9 @@ This provides a better user experience by showing actual options instead of requ
   - Follows same pattern as flows and custom fields dropdowns
 
 ### October 25, 2025 - Version 0.2.1 Published to npm ✅
+
 - ✅ **Fix**: Removed accents from operation names to fix n8n rendering issues
-- ✅ **Published to npm**: https://www.npmjs.com/package/n8n-nodes-nicochat
+- ✅ **Published to npm**: https://www.npmjs.com/package/n8n-nodes-uchat
 - Changed operation names (descriptions kept in Portuguese):
   - "Adicionar Múltiplas Tags" → "Adicionar Multiplas Tags"
   - "Remover Múltiplas Tags" → "Remover Multiplas Tags"
@@ -234,7 +247,8 @@ This provides a better user experience by showing actual options instead of requ
   - "Obter Histórico" → "Obter Historico"
 
 ### October 25, 2025 - Version 0.2.0 Published to npm
-- ✅ **Published to npm**: https://www.npmjs.com/package/n8n-nodes-nicochat
+
+- ✅ **Published to npm**: https://www.npmjs.com/package/n8n-nodes-uchat
 - ✅ **New Search Operation**: Replaced "Get Many" with "Search Contacts" featuring 16 advanced filters:
   - Basic filters: name, phone, email
   - Channel filters: is_channel (WhatsApp/Instagram/Email/Telegram/SMS)
@@ -251,14 +265,16 @@ This provides a better user experience by showing actual options instead of requ
 - ✅ **Architect Review**: Implementation reviewed and approved
 
 ### October 24, 2025 - Version 0.1.7 Published
+
 - ✅ Fixed all linting errors for npm publication
-- ✅ Updated to official NicoChat icon (blue with white "N")
+- ✅ Updated to official uChat icon
 - ✅ Added Icon type import for credentials
 - ✅ Fixed alphabetical ordering of all operation options
 - ✅ Removed unused error variable
 - ✅ Build: 0 errors, Lint: 0 errors
 
 ### Initial Implementation
+
 - ✅ Set up Node.js 20 development environment
 - ✅ Created project structure from n8n-nodes-starter
 - ✅ Implemented all 7 resources with 19 total operations
@@ -269,18 +285,21 @@ This provides a better user experience by showing actual options instead of requ
 ## Next Steps for User
 
 ### To Use This Node Locally:
+
 1. Run `npm run build` to compile
 2. Run `npm link` to create local package link
-3. In n8n directory: `npm link n8n-nodes-nicochat`
+3. In n8n directory: `npm link n8n-nodes-uchat`
 4. Restart n8n
 
 ### To Publish to npm:
+
 1. Create npm account if needed
 2. Update version in package.json
 3. Run `npm publish`
-4. Users can install with: `npm install n8n-nodes-nicochat`
+4. Users can install with: `npm install n8n-nodes-uchat`
 
 ### To Submit for n8n Verification:
+
 1. Publish to npm first
 2. Test thoroughly in production
 3. Submit via [n8n Creator Portal](https://creators.n8n.io/nodes)

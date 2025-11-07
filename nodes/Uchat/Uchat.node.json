@@ -1,17 +1,17 @@
 {
-        "node": "n8n-nodes-uchat.Uchat",
+        "node": "n8n-nodes-uchat.uchat",
         "nodeVersion": "1.0",
         "codexVersion": "1.0",
-        "categories": ["Communication"],
+        "categories": ["Communication", "Marketing & Content"],
         "resources": {
                 "credentialDocumentation": [
                         {
-                                "url": "https://nicochat.atlassian.net/wiki/spaces/NicoChat/pages/57081869/API"
+                                "url": "https://www.uchat.com.au/api"
                         }
                 ],
                 "primaryDocumentation": [
                         {
-                                "url": "https://www.uchat.com.au/api"
+                                "url": "https://uchat.atlassian.net/wiki/spaces/UKB/overview"
                         }
                 ]
         }

@@ -8,7 +8,7 @@ Obrigado pelo interesse em contribuir! Este é um projeto open-source e contribu
 
 Se você encontrar um bug, por favor:
 
-1. Verifique se o bug já não foi reportado nas [Issues](https://github.com/nicolaom/n8n-nodes-nicochat/issues)
+1. Verifique se o bug já não foi reportado nas [Issues](https://github.com/renygrando/n8n-nodes-uchat/issues)
 2. Crie uma nova issue com:
    - Descrição clara do problema
    - Passos para reproduzir
@@ -20,7 +20,7 @@ Se você encontrar um bug, por favor:
 
 Para sugerir novas funcionalidades:
 
-1. Abra uma [Issue](https://github.com/nicolaom/n8n-nodes-nicochat/issues) descrevendo:
+1. Abra uma [Issue](https://github.com/renygrando/n8n-nodes-uchat/issues) descrevendo:
    - A funcionalidade proposta
    - Por que seria útil
    - Como você imagina que funcionaria
@@ -30,40 +30,47 @@ Para sugerir novas funcionalidades:
 1. **Fork o repositório**
 
 2. **Clone seu fork**
+
    ```bash
    git clone https://github.com/seu-usuario/n8n-nodes-uchat.git
    cd n8n-nodes-uchat
    ```
 
 3. **Instale as dependências**
+
    ```bash
    npm install
    ```
 
 4. **Crie uma branch para sua feature**
+
    ```bash
    git checkout -b feature/minha-feature
    ```
 
 5. **Faça suas alterações**
+
    - Siga o estilo de código existente
    - Mantenha os nomes de operações sem acentos (limitação do n8n)
    - Use português nas descrições e labels
    - Teste suas alterações
 
 6. **Compile e teste**
+
    ```bash
    npm run build
    npm run lint
    ```
 
 7. **Commit suas alterações**
+
    ```bash
    git add .
    git commit -m "feat: descrição da sua feature"
    ```
 
 8. **Push para seu fork**
+
    ```bash
    git push origin feature/minha-feature
    ```
@@ -88,9 +95,9 @@ Usamos [Conventional Commits](https://www.conventionalcommits.org/):
 
 ### Estrutura de Código
 
-- Operações no arquivo `nodes/NicoChat/NicoChat.node.ts`
-- Triggers no arquivo `nodes/NicoChat/NicoChatTrigger.node.ts`
-- Credenciais no arquivo `credentials/NicoChatApi.credentials.ts`
+- Operações no arquivo `nodes/Uchat/Uchat.node.ts`
+- Triggers no arquivo `nodes/Uchat/UchatTrigger.node.ts`
+- Credenciais no arquivo `credentials/UchatApi.credentials.ts`
 
 ### Testes
 
@@ -105,16 +112,19 @@ Antes de submeter um PR, certifique-se de que:
 ### Configurar n8n para desenvolvimento
 
 1. **Link o node localmente**
+
    ```bash
    npm link
    ```
 
 2. **Na pasta do n8n**
+
    ```bash
    npm link n8n-nodes-uchat
    ```
 
 3. **Inicie o n8n em modo desenvolvimento**
+
    ```bash
    n8n start
    ```
@@ -149,4 +159,4 @@ Ao contribuir, você concorda que suas contribuições serão licenciadas sob a 
 
 ## Dúvidas?
 
-Abra uma [Issue](https://github.com/nicolaom/n8n-nodes-nicochat/issues) com a tag `question`.
+Abra uma [Issue](https://github.com/renygrando/n8n-nodes-uchat/issues) com a tag `question`.
